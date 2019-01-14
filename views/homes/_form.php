@@ -17,17 +17,19 @@ $this->registerJsFile(
 			'class'                                 => 'myform'
 		]]);?>
 
-<?=$form->field($model, 'firstname')->textInput(['maxlength' => true])?>
+<?=$form->field($model, 'firstname')->textInput(['maxlength' => true, 'required' => true])?>
 
 <?=$form->field($model, 'lastname')->textInput(['maxlength' => true])?>
 
-<?=$form->field($model, 'email')->textInput(['maxlength' => true])?>
+<?=$form->field($model, 'email')->textInput(['maxlength' => true, 'required' => true])?>
 
-<?=$form->field($model, 'phone')->textInput(['maxlength' => true])?>
+<?=$form->field($model, 'phone')->textInput(['maxlength' => true, 'required' => true])?>
 
 <?=$form->field($model, 'address')->textarea(['rows' => 6])?>
 
-<?=$form->field($model, 'home_sqft')->textInput()?>
+<?=$form->field($model, 'home_sqft')->textInput(['required' => true])?>
+
+<?=$form->field($model, 'idval')->hiddenInput(['id' => 'idval', 'value' => 0])->label(false);?>
 
 <?php /*=$form->field($model, 'form_submit')->textInput() */?>
 <div class="form-group">
@@ -36,4 +38,9 @@ $this->registerJsFile(
 
 <?php ActiveForm::end();?>
 </div>
+<script type="text/javascript">
+	var ajaxurl = "<?php echo \Yii::$app->getUrlManager()->createUrl('homes/saving')?>";
+
+
+</script>
 

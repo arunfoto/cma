@@ -62,8 +62,21 @@ class HomesController extends Controller {
 	 */
 	public function actionCreate() {
 		$model = new Homes();
-
-		if ($model->load(Yii::$app->request->post())) {
+		//print_r($_POST);
+		//exit;
+		if ($model->load(Yii::$app->request->post()) && empty($_POST['Homes']['idval'])) {
+			//print "Enter===>1";
+			//exit;
+			$model              = new Homes();
+			$model->date_submit = date('Y-m-d');
+			$model->form_submit = 1;
+			$model->save();
+			return $this->redirect(['view', 'id' => $model->id]);
+		} elseif ($model->load(Yii::$app->request->post())) {
+			//print "Enter===>2";
+			//exit;
+			$model = $this->findModel($_POST['Homes']['idval']);
+			$model->load(Yii::$app->request->post());
 			$model->date_submit = date('Y-m-d');
 			$model->form_submit = 1;
 			$model->save();
@@ -73,6 +86,49 @@ class HomesController extends Controller {
 		return $this->render('create', [
 				'model' => $model,
 			]);
+	}
+
+	public function actionSaving() {
+		$info = json_decode($_POST['info']);
+		if (empty($info->id)) {
+			$model = new Homes();
+		} else if (isset($info->id)) {
+			$model = $this->findModel($info->id);
+		}
+
+		//print_r($info);
+		//exit;
+
+		$model->firstname = $info->firstname;
+		if (isset($info->lastname)) {
+			$model->lastname = $info->lastname;
+		}
+
+		if (isset($info->email)) {
+			$model->email = $info->email;
+		}
+
+		if (isset($info->phone)) {
+			$model->phone = $info->phone;
+		}
+
+		if (isset($info->address)) {
+			$model->address = $info->address;
+		}
+
+		if (isset($info->homesqft)) {
+			$model->home_sqft = $info->homesqft;
+		}
+
+		$model->save();
+
+		//print_r($model->errors);
+
+		$id = $model->id;
+
+		print$id;
+
+		exit;
 	}
 
 	/**

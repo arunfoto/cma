@@ -30,7 +30,7 @@ class Homes extends \yii\db\ActiveRecord {
 	 */
 	public function rules() {
 		return [
-			[['firstname', 'email', 'phone', 'home_sqft'], 'required'],
+			//[['firstname', 'email', 'phone', 'home_sqft'], 'required'],
 			[['address'], 'string'],
 			[['home_sqft', 'form_submit'], 'integer'],
 			[['firstname', 'lastname', 'email'], 'string', 'max' => 250],
