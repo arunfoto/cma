@@ -2,6 +2,6 @@ This is a Yii2 Project done by Arun Prabhakar. Git commit is done; but in-order 
 
 	php composer.phar update 
 
-to get the files need. Go to the config/db.php and chnagne the connection string to your present db. SQL is added in the repo as db.sql.
+to get the files need. Go to the config/db.php and change the connection string to your present db. SQL is added in the repo as db.sql.
 
 I take 3.15 hrs to do this work. Thank you.
